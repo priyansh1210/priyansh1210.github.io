@@ -1,4 +1,5 @@
-import type { Project } from './types';
+// Explicit extension: vite.config.ts loads this file too, outside the bundler.
+import type { Project } from './types.ts';
 
 /*
  * Case studies. `slug` becomes the URL (/work/<slug>). Every number comes from
