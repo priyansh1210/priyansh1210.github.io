@@ -1,0 +1,178 @@
+/* The box has the standing cat's frame shape, 365 × 277 px; the wider run
+   frames overflow it evenly on both sides (see Run below). */
+.cat {
+  /* 12 run frames at 16 fps (StreetScene's STREET_SPEED depends on this). */
+  --cat-run-cycle: 0.75s;
+  --cat-fill: #f2ab6d;
+  --cat-shade: #dc8a4c;
+  --cat-stripe: #e3924f;
+  --cat-cream: #fbe4c8;
+  --cat-eye: #2a2f3a;
+  /* The street's line colour (StreetScene.css --sc-ink), made opaque over the
+     page background so the outline matches the buildings' lines exactly. */
+  --cat-line: color-mix(in srgb, var(--ink) 38%, var(--bg));
+  position: relative;
+  height: 100%;
+  aspect-ratio: 365 / 277;
+}
+
+[data-theme='dark'] .cat {
+  --cat-fill: #d88a4f;
+  --cat-shade: #b06a38;
+  --cat-stripe: #bf7740;
+  --cat-cream: #e9cfae;
+  --cat-eye: #1a1410;
+}
+
+.cat-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* All the stencils sit on one 12-frame-wide strip. Sliding the strip by its
+   own width in 12 steps shows each frame in turn, every layer in lockstep. */
+.cat-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% * 12);
+  height: 100%;
+}
+
+@keyframes cat-flip {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.cat-layer {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.cat-layer--fill {
+  background: var(--cat-fill);
+  -webkit-mask-image: url('/cat/cat-fill.webp');
+  mask-image: url('/cat/cat-fill.webp');
+}
+
+.cat-layer--shade {
+  background: var(--cat-shade);
+  -webkit-mask-image: url('/cat/cat-shade.webp');
+  mask-image: url('/cat/cat-shade.webp');
+}
+
+.cat-layer--stripe {
+  background: var(--cat-stripe);
+  -webkit-mask-image: url('/cat/cat-stripe.webp');
+  mask-image: url('/cat/cat-stripe.webp');
+}
+
+.cat-layer--cream {
+  background: var(--cat-cream);
+  -webkit-mask-image: url('/cat/cat-cream.webp');
+  mask-image: url('/cat/cat-cream.webp');
+}
+
+.cat-layer--line {
+  background: var(--cat-line);
+  -webkit-mask-image: url('/cat/cat-line.webp');
+  mask-image: url('/cat/cat-line.webp');
+}
+
+.cat-layer--eye {
+  background: var(--cat-eye);
+  -webkit-mask-image: url('/cat/cat-eye.webp');
+  mask-image: url('/cat/cat-eye.webp');
+}
+
+/* ---------- Run ----------
+   Run frames are 608 × 277: wider, for the stretched gallop poses, and centred
+   on the same spot as the box. */
+.cat-frame--run {
+  left: calc(-100% * (608 - 365) / 2 / 365);
+  right: calc(-100% * (608 - 365) / 2 / 365);
+}
+
+.cat-frame--run .cat-strip {
+  animation: cat-flip var(--cat-run-cycle) steps(12) infinite;
+}
+
+.cat-layer--run-fill {
+  background: var(--cat-fill);
+  -webkit-mask-image: url('/cat/cat-run-fill.webp');
+  mask-image: url('/cat/cat-run-fill.webp');
+}
+
+.cat-layer--run-stripe {
+  background: var(--cat-stripe);
+  -webkit-mask-image: url('/cat/cat-run-stripe.webp');
+  mask-image: url('/cat/cat-run-stripe.webp');
+}
+
+.cat-layer--run-line {
+  background: var(--cat-line);
+  -webkit-mask-image: url('/cat/cat-run-line.webp');
+  mask-image: url('/cat/cat-run-line.webp');
+}
+
+.cat-layer--run-eye {
+  background: var(--cat-eye);
+  -webkit-mask-image: url('/cat/cat-run-eye.webp');
+  mask-image: url('/cat/cat-run-eye.webp');
+}
+
+.cat-shadow {
+  position: absolute;
+  left: 14%;
+  right: 12%;
+  bottom: 0.5%;
+  height: 5%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.18), transparent);
+}
+
+[data-theme='dark'] .cat-shadow {
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), transparent);
+}
+
+/* ---------- Idle (404 page): standing on frame 5, breathing, wondering ---------- */
+
+.cat--idle .cat-strip {
+  transform: translateX(calc(-100% * 4 / 12));
+}
+
+.cat--idle .cat-frame {
+  transform-origin: 50% 100%;
+  animation: cat-breathe 3.2s ease-in-out infinite;
+}
+
+.cat-q {
+  position: absolute;
+  right: 4%;
+  top: -14%;
+  font: 600 clamp(18px, 2.4vw, 28px) var(--font-sans);
+  color: var(--accent-text);
+  animation: cat-wonder 3.6s var(--ease) infinite;
+}
+
+@keyframes cat-breathe {
+  50% {
+    transform: scaleY(1.012);
+  }
+}
+
+@keyframes cat-wonder {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(10deg);
+  }
+}

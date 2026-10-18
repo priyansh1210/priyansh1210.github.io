@@ -1,0 +1,250 @@
+/*
+ * Design tokens.
+ *  1. Shared scales on :root (type, space, motion).
+ *  2. Neutrals per theme: [data-theme='dark' | 'light'].
+ *  3. Palettes: [data-palette='…'] sets the accent family; a palette may also
+ *     tint the neutrals for one theme ([data-palette][data-theme] wins).
+ * Components only use the semantic names (--bg, --ink, --line, --accent…),
+ * never raw hex values, so every palette × theme combination stays in step.
+ * The palette list for the picker lives in src/theme/palettes.ts.
+ */
+:root {
+  --font-sans: 'General Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Type scale — fluid between mobile and wide desktop */
+  --fs-micro: 11px;
+  --fs-xs: 12.5px;
+  --fs-sm: 14.5px;
+  --fs-base: 16.5px;
+  --fs-md: 17.5px;
+  --fs-lead: clamp(17px, 1.45vw, 19.5px);
+  --fs-h4: clamp(20px, 1.8vw, 25px);
+  --fs-h3: clamp(25px, 2.5vw, 35px);
+  --fs-h2: clamp(32px, 3.7vw, 54px);
+  --fs-h1: clamp(40px, 5.4vw, 84px);
+  --fs-display: clamp(44px, 7.2vw, 118px);
+  --fs-num: clamp(44px, 5.4vw, 84px);
+  --fs-ghost: clamp(120px, 24vw, 380px);
+
+  /* Space & layout */
+  --gutter: clamp(16px, 4vw, 48px);
+  --max-w: 1320px;
+  --space-section: clamp(80px, 12vh, 160px);
+  --space-section-sm: clamp(64px, 9vh, 112px);
+  --header-h: 72px;
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Physical light — sun, lamps, lit windows, "in progress" — same in every palette */
+  --amber: #f3b44a;
+
+  --glow: color-mix(in srgb, var(--accent) var(--glow-strength), transparent);
+}
+
+/* ================= Neutrals ================= */
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #050711;
+  --bg-raised: #0a0d1a;
+  --surface: #0e1122;
+  --surface-2: #161a2e;
+  --ink: #efede2;
+  --ink-2: #b7b5aa;
+  --ink-3: #8a897f;
+  --ink-4: #4a4a44;
+  --line: rgba(239, 237, 226, 0.13);
+  --line-2: rgba(239, 237, 226, 0.06);
+  --accent-text: var(--accent);
+  --amber-text: #f3b44a;
+  --glow-strength: 16%;
+  --shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.75);
+  --cover-l: 18%;
+  --cover-l2: 32%;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f7f7f7;
+  --bg-raised: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #eceef3;
+  --ink: #0f1524;
+  --ink-2: #383c48;
+  --ink-3: #62656f;
+  --ink-4: #c0c1c8;
+  --line: rgba(15, 21, 36, 0.12);
+  --line-2: rgba(15, 21, 36, 0.06);
+  --accent-text: var(--ink);
+  --amber-text: #9a5d00;
+  --glow-strength: 40%;
+  --shadow: 0 30px 60px -30px rgba(15, 21, 36, 0.28);
+  --cover-l: 88%;
+  --cover-l2: 76%;
+}
+
+/* ================= Palettes =================
+   --accent        buttons, highlights
+   --accent-hover  primary button hover
+   --on-accent     text on an accent background
+   --accent-text   accent used as text (darker in light themes for contrast)
+   --warm          secondary colour for illustration details */
+
+/* Lime — electric lime on ink (default) */
+:root,
+[data-palette='lime'] {
+  --accent: #c0eb3a;
+  --accent-hover: #e2f79a;
+  --on-accent: #10160a;
+  --warm: #f3b44a;
+}
+
+[data-palette='lime'][data-theme='light'] {
+  --accent-text: #4a6400;
+}
+
+/* Paper — warm cream and amber, like a printed page */
+[data-palette='paper'] {
+  --accent: #f3b44a;
+  --accent-hover: #f7c772;
+  --on-accent: #16140e;
+  --warm: #e07a5f;
+}
+
+[data-palette='paper'][data-theme='light'] {
+  --bg: #fffcf0;
+  --bg-raised: #fbf7e6;
+  --surface: #fffdf7;
+  --surface-2: #f1ecd8;
+  --ink: #16140e;
+  --ink-2: #57534a;
+  --ink-3: #736e60;
+  --ink-4: #cfc9b8;
+  --line: rgba(22, 20, 14, 0.14);
+  --line-2: rgba(22, 20, 14, 0.07);
+  --accent-text: #8f5600;
+  --cover-l: 90%;
+  --cover-l2: 80%;
+}
+
+[data-palette='paper'][data-theme='dark'] {
+  --bg: #13120d;
+  --bg-raised: #17160e;
+  --surface: #1c1b13;
+  --surface-2: #26241b;
+  --ink: #f1eee6;
+  --ink-2: #a4a097;
+  --ink-3: #928c7e;
+  --ink-4: #4d4a40;
+  --line: rgba(241, 238, 230, 0.14);
+  --line-2: rgba(241, 238, 230, 0.07);
+}
+
+/* Ocean — sky blue on deep navy */
+[data-palette='ocean'] {
+  --accent: #6cb8ff;
+  --accent-hover: #a3d3ff;
+  --on-accent: #031427;
+  --warm: #ffb86b;
+}
+
+[data-palette='ocean'][data-theme='light'] {
+  --bg: #f4f7fb;
+  --surface-2: #e6ecf5;
+  --accent-text: #0b5cb0;
+}
+
+[data-palette='ocean'][data-theme='dark'] {
+  --bg: #040a16;
+  --bg-raised: #08101f;
+  --surface: #0c1528;
+  --surface-2: #142037;
+}
+
+/* Violet — lavender with a pink spark */
+[data-palette='violet'] {
+  --accent: #b69cff;
+  --accent-hover: #d3c4ff;
+  --on-accent: #170a3a;
+  --warm: #ff9fc6;
+}
+
+[data-palette='violet'][data-theme='light'] {
+  --bg: #f7f6fb;
+  --surface-2: #ece9f5;
+  --accent-text: #5b37d6;
+}
+
+[data-palette='violet'][data-theme='dark'] {
+  --bg: #08060f;
+  --bg-raised: #0e0b19;
+  --surface: #131022;
+  --surface-2: #1c1830;
+}
+
+/* Coral — sunset coral and gold */
+[data-palette='coral'] {
+  --accent: #ff7a59;
+  --accent-hover: #ffa184;
+  --on-accent: #2b0a02;
+  --warm: #ffd166;
+}
+
+[data-palette='coral'][data-theme='light'] {
+  --bg: #fbf8f5;
+  --surface-2: #f1eae4;
+  --accent-text: #b5401e;
+}
+
+[data-palette='coral'][data-theme='dark'] {
+  --bg: #0c0807;
+  --bg-raised: #130d0b;
+  --surface: #191210;
+  --surface-2: #241a17;
+}
+
+/* Mint — fresh mint and peach */
+[data-palette='mint'] {
+  --accent: #5eead4;
+  --accent-hover: #9ff5e6;
+  --on-accent: #03302a;
+  --warm: #fdba74;
+}
+
+[data-palette='mint'][data-theme='light'] {
+  --bg: #f4f9f8;
+  --surface-2: #e3efec;
+  --accent-text: #0e7468;
+}
+
+[data-palette='mint'][data-theme='dark'] {
+  --bg: #030d0c;
+  --bg-raised: #071413;
+  --surface: #0b1b19;
+  --surface-2: #122624;
+}
+
+/* Mono — black and white, no colour accent */
+[data-palette='mono'] {
+  --warm: #f3b44a;
+}
+
+[data-palette='mono'][data-theme='dark'] {
+  --accent: #efede2;
+  --accent-hover: #ffffff;
+  --on-accent: #050711;
+}
+
+[data-palette='mono'][data-theme='light'] {
+  --accent: #0f1524;
+  --accent-hover: #2a3142;
+  --on-accent: #f7f7f7;
+  --accent-text: #0f1524;
+}

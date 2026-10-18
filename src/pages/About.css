@@ -1,0 +1,169 @@
+.about-head {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+  padding-top: calc(var(--header-h) + clamp(48px, 12vh, 136px));
+  padding-bottom: clamp(40px, 7vh, 88px);
+}
+
+/* Same eyebrow treatment as PageHeader */
+.about-intro .phead-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.about-intro .phead-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.about-title {
+  font-size: var(--fs-h1);
+  animation: title-rise 1s var(--ease) both;
+}
+
+.about-bio {
+  margin-top: clamp(28px, 5vh, 48px);
+  display: grid;
+  gap: 16px;
+  max-width: 58ch;
+  font-size: var(--fs-md);
+  color: var(--ink-2);
+  animation: title-rise 1s 0.12s var(--ease) both;
+}
+
+.about-bio p:first-child {
+  color: var(--ink);
+  font-size: var(--fs-lead);
+}
+
+.about-portrait {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  margin: 0;
+  animation: title-rise 1.1s 0.2s var(--ease) both;
+}
+
+.about-portrait img,
+.about-portrait .cover {
+  --ratio: 4 / 5;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.about-portrait .cover-word {
+  font-size: clamp(64px, 9vw, 140px);
+}
+
+.about-portrait figcaption {
+  margin-top: 14px;
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+/* ---------- Skills ---------- */
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.skill-title {
+  font-size: var(--fs-h4);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-group ul {
+  display: grid;
+  gap: 8px;
+  color: var(--ink-2);
+}
+
+/* ---------- Principles ---------- */
+
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.principle {
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  border: 1px solid var(--line-2);
+}
+
+.principle-no {
+  font-size: var(--fs-xs);
+  color: var(--accent-text);
+}
+
+.principle-title {
+  margin-top: 28px;
+  font-size: var(--fs-h4);
+}
+
+.principle-body {
+  margin-top: 10px;
+  color: var(--ink-2);
+}
+
+/* ---------- Now ---------- */
+
+.now {
+  border-top: 1px solid var(--line);
+}
+
+.now li {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.32fr) 1fr;
+  gap: 32px;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.now-value {
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 960px) {
+  .about-head {
+    grid-template-columns: 1fr;
+  }
+
+  .about-portrait {
+    position: static;
+    max-width: 420px;
+  }
+
+  .skills {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .principles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .skills,
+  .now li {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

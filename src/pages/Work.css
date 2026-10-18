@@ -1,0 +1,51 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.filter:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.filter.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.filter-count {
+  font-size: var(--fs-micro);
+  opacity: 0.6;
+}
+
+.work-item {
+  animation: card-in 0.9s var(--ease) both;
+  animation-delay: calc(var(--i) * 90ms);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+}

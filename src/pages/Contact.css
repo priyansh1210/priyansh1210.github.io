@@ -1,0 +1,224 @@
+.contact {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  padding-bottom: var(--space-section);
+}
+
+/* ---------- Form ---------- */
+
+.cform {
+  display: grid;
+  gap: 28px;
+}
+
+.cform-topics {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.cform-topics legend {
+  margin-bottom: 14px;
+}
+
+.cform-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cform-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.cform-chip:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.cform-chip.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.cform-chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cform-chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.cform-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.cfield {
+  display: grid;
+  gap: 10px;
+}
+
+.cfield input,
+.cfield textarea {
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--fs-md);
+  color: var(--ink);
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+
+.cfield input::placeholder,
+.cfield textarea::placeholder {
+  color: var(--ink-3);
+  opacity: 0.7;
+}
+
+.cfield input:focus,
+.cfield textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.cform-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.cform-note {
+  font-size: var(--fs-xs);
+  max-width: 36ch;
+}
+
+/* ---------- Aside ---------- */
+
+.contact-aside {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+
+.ccard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  text-align: left;
+}
+
+.ccard--email {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  transition: transform 0.4s var(--ease);
+}
+
+.ccard--email:hover {
+  transform: translateY(-3px);
+}
+
+.ccard--email .eyebrow {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.ccard-value {
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  word-break: break-all;
+}
+
+.ccard-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+}
+
+.ccard-links {
+  display: grid;
+  gap: 8px;
+}
+
+.ccard-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.ccard-links a:hover {
+  color: var(--accent-text);
+}
+
+.ccard-details {
+  display: grid;
+  gap: 10px;
+  font-size: var(--fs-sm);
+}
+
+.ccard-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ccard-details dt {
+  color: var(--ink-3);
+}
+
+.ccard-details dd {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-aside {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .cform-row {
+    grid-template-columns: 1fr;
+  }
+}

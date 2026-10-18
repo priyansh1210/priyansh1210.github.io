@@ -1,0 +1,42 @@
+.shead {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.32fr) 1fr auto;
+  align-items: end;
+  gap: 20px 32px;
+  margin-bottom: clamp(40px, 7vh, 80px);
+}
+
+.shead-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  align-self: start;
+  padding-top: 0.6em;
+}
+
+.shead-index {
+  font-size: var(--fs-micro);
+  color: var(--on-accent);
+  background: var(--accent);
+  padding: 3px 7px 2px;
+  border-radius: 4px;
+}
+
+.shead-title {
+  font-size: var(--fs-h2);
+  max-width: 18ch;
+}
+
+.shead-intro {
+  margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .shead {
+    grid-template-columns: 1fr;
+  }
+
+  .shead-link {
+    justify-self: start;
+  }
+}

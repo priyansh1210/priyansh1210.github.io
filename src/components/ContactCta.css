@@ -1,0 +1,118 @@
+.cta {
+  padding-block: var(--space-section);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.cta-inner {
+  position: relative;
+}
+
+.cta-ghost {
+  position: absolute;
+  right: calc(var(--gutter) * -0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fs-ghost);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cta-content {
+  position: relative;
+}
+
+.cta-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-bottom: 28px;
+}
+
+.cta-title {
+  font-size: var(--fs-display);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.cta-title-soft {
+  color: var(--ink-3);
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: clamp(36px, 6vh, 56px);
+}
+
+.cta-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  height: 64px;
+  padding: 0 14px 0 28px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition:
+    transform 0.35s var(--ease),
+    background-color 0.3s;
+  max-width: 100%;
+}
+
+.cta-email:hover {
+  background: var(--accent-hover);
+}
+
+.cta-email:active {
+  transform: scale(0.98);
+}
+
+.cta-email-addr {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cta-email-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(16, 22, 10, 0.1);
+  font-size: var(--fs-xs);
+  flex: none;
+}
+
+.cta-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 40px;
+  color: var(--ink-2);
+}
+
+.cta-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.cta-socials a:hover {
+  color: var(--ink);
+}

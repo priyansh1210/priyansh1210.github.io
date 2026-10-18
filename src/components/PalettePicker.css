@@ -1,0 +1,114 @@
+.pp {
+  position: relative;
+}
+
+.pp-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: border-color 0.3s;
+}
+
+.pp-btn:hover,
+.pp-btn[aria-expanded='true'] {
+  border-color: var(--ink);
+}
+
+.pp-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 0 0 4px var(--line);
+  transition: transform 0.5s var(--ease);
+}
+
+.pp-btn:hover .pp-dot {
+  transform: scale(1.15);
+}
+
+.pp-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 272px;
+  padding: 12px 8px 8px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-raised);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition:
+    opacity 0.25s,
+    transform 0.35s var(--ease);
+}
+
+.pp-menu.is-open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.pp-head {
+  padding: 0 10px 8px;
+}
+
+.pp-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-align: left;
+  transition: background-color 0.25s;
+}
+
+.pp-opt:hover {
+  background: var(--surface-2);
+}
+
+.pp-opt.is-on {
+  background: var(--surface-2);
+}
+
+/* Accent on the left half; the palette's dark and light backgrounds on the right */
+.pp-swatch {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: conic-gradient(var(--a) 0 50%, var(--d) 50% 75%, var(--l) 75% 100%);
+  box-shadow: inset 0 0 0 1px rgba(128, 128, 128, 0.35);
+  transform: rotate(-90deg);
+}
+
+.pp-opt.is-on .pp-swatch {
+  box-shadow:
+    inset 0 0 0 1px rgba(128, 128, 128, 0.35),
+    0 0 0 2px var(--bg-raised),
+    0 0 0 3.5px var(--ink);
+}
+
+.pp-text {
+  display: grid;
+  line-height: 1.25;
+}
+
+.pp-name {
+  font-weight: 500;
+  font-size: var(--fs-sm);
+}
+
+.pp-note {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}

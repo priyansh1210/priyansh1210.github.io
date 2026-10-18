@@ -1,0 +1,8 @@
+node_modules
+dist
+# Third-party source assets (licences forbid redistributing the originals)
+vendor
+*.local
+.DS_Store
+*.log
+.vite

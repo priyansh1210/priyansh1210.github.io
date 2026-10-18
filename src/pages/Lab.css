@@ -1,0 +1,91 @@
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.lab-card {
+  border: 1px solid var(--line-2);
+  border-radius: calc(var(--radius) + 6px);
+  padding: 6px;
+  background: var(--bg-raised);
+  transition: border-color 0.4s;
+}
+
+.lab-card:hover {
+  border-color: var(--line);
+}
+
+.lab-card .cover {
+  --ratio: 16 / 9;
+}
+
+.lab-body {
+  padding: 22px 18px 18px;
+}
+
+.lab-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lab-name {
+  font-size: var(--fs-h4);
+}
+
+.lab-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.lab-status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.lab-status[data-status='Live']::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--glow);
+}
+
+.lab-status[data-status='In progress']::before {
+  background: var(--amber);
+}
+
+.lab-desc {
+  margin-top: 10px;
+  color: var(--ink-2);
+}
+
+.lab-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.lab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}

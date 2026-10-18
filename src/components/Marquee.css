@@ -1,0 +1,44 @@
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: clamp(18px, 3vh, 28px);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 48s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  flex: none;
+}
+
+.marquee-group li {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  padding-right: clamp(20px, 3vw, 40px);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+
+.marquee-star {
+  font-size: 0.45em;
+  color: var(--accent-text);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

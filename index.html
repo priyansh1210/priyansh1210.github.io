@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Theme and palette before first paint, so there's never a flash of the wrong
+         colours. Order: ?theme= / ?palette= in the URL (handy for previews) → the
+         visitor's saved choice → the defaults in site.ts (filled in at build time).
+         An unknown palette name falls back to the :root defaults in tokens.css.
+         ThemeProvider takes over from here. -->
+    <script>
+      (function () {
+        var t = '{{theme}}';
+        var p = '{{palette}}';
+        try {
+          var q = new URLSearchParams(location.search);
+          var qt = q.get('theme');
+          var st = localStorage.getItem('theme-pref');
+          if (qt === 'light' || qt === 'dark') t = qt;
+          else if (st === 'light' || st === 'dark') t = st;
+          p = q.get('palette') || localStorage.getItem('palette-pref') || p;
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      })();
+    </script>
+    <!-- Stop-gap background until the stylesheet arrives. :where() keeps it at zero
+         specificity, so the palette's real --bg (base.css) always wins once loaded. -->
+    <style>
+      :where(html[data-theme='dark']) { background: #0c0807; }
+      :where(html[data-theme='light']) { background: #fbf8f5; }
+    </style>
+
+    <!-- {{...}} placeholders are filled from src/content/site.ts at build time (see vite.config.ts). -->
+    <title>{{name}} — {{role}}</title>
+    <meta name="description" content="{{description}}" />
+    <meta name="theme-color" content="#0c0807" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{name}}" />
+    <meta property="og:title" content="{{name}} — {{role}}" />
+    <meta property="og:description" content="{{description}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts load without blocking first paint: preload as a style, then flip
+         rel→stylesheet once it arrives. display=swap shows the fallback face
+         immediately. <noscript> keeps them working with JS off. -->
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" /></noscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" /></noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>This site needs JavaScript to run. You can reach me at {{email}}.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

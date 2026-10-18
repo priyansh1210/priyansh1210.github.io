@@ -1,0 +1,146 @@
+/* ---------- Steps: a rail with a node per step that lights up as it scrolls in ---------- */
+
+.steps {
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(72px + 5px);
+  width: 1px;
+  background: var(--line);
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px 12px 1fr minmax(200px, 0.6fr);
+  gap: 0 28px;
+  align-items: start;
+  padding-block: clamp(28px, 5vh, 48px);
+}
+
+.step-no {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  padding-top: 0.6em;
+}
+
+.step-dot {
+  width: 11px;
+  height: 11px;
+  margin-top: 0.75em;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-3);
+  background: var(--bg);
+  transition:
+    background-color 0.6s 0.3s,
+    border-color 0.6s 0.3s,
+    box-shadow 0.6s 0.3s;
+}
+
+.step[data-in='true'] .step-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px var(--glow);
+}
+
+.step-title {
+  font-size: var(--fs-h3);
+}
+
+.step-desc {
+  margin-top: 10px;
+  color: var(--ink-2);
+  max-width: 48ch;
+}
+
+.step-outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 0.4em;
+}
+
+/* ---------- AI ---------- */
+
+.process-ai {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 80px);
+}
+
+.process-ai .shead {
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
+}
+
+/* ---------- Engagements ---------- */
+
+.engage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.engage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  transition:
+    border-color 0.4s,
+    transform 0.5s var(--ease);
+}
+
+.engage-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.engage-title {
+  font-size: var(--fs-h4);
+}
+
+.engage-desc {
+  color: var(--ink-2);
+  flex: 1;
+}
+
+.engage-detail {
+  font-size: var(--fs-xs);
+  color: var(--accent-text);
+}
+
+.engage-tools {
+  margin-top: 32px;
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 900px) {
+  .step {
+    grid-template-columns: 40px 12px 1fr;
+    gap: 0 16px;
+  }
+
+  .steps::before {
+    left: calc(40px + 16px + 5px);
+  }
+
+  .step-outputs {
+    grid-column: 3;
+    padding-top: 16px;
+  }
+
+  .process-ai,
+  .engage-grid {
+    grid-template-columns: 1fr;
+  }
+}

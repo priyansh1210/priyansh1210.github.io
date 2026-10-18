@@ -1,0 +1,30 @@
+.phead {
+  padding-top: calc(var(--header-h) + clamp(48px, 12vh, 136px));
+  padding-bottom: clamp(40px, 7vh, 88px);
+}
+
+.phead-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.phead-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.phead-title {
+  font-size: var(--fs-h1);
+  max-width: 16ch;
+  animation: title-rise 1s var(--ease) both;
+}
+
+.phead-intro {
+  margin-top: 24px;
+  animation: title-rise 1s 0.12s var(--ease) both;
+}

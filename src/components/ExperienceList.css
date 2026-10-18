@@ -1,0 +1,58 @@
+.xp {
+  border-top: 1px solid var(--line);
+}
+
+.xp-row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 150px 1.1fr 1fr 1.5fr;
+  align-items: baseline;
+  gap: 8px 32px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* A wash of accent that sweeps in from the left on hover */
+.xp-row::before {
+  content: '';
+  position: absolute;
+  inset: 0 calc(var(--gutter) * -0.5);
+  z-index: -1;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--glow), transparent 70%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+
+.xp-row:hover::before {
+  transform: scaleX(1);
+}
+
+.xp-period {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.xp-company {
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.xp-role {
+  color: var(--ink);
+}
+
+.xp-note {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 900px) {
+  .xp-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

@@ -1,0 +1,41 @@
+.nf {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: calc(var(--header-h) + 48px);
+}
+
+.nf-inner {
+  position: relative;
+  padding-bottom: clamp(24px, 5vh, 56px);
+}
+
+.nf-inner::before {
+  content: '404';
+  position: absolute;
+  right: var(--gutter);
+  bottom: 0;
+  font-size: var(--fs-ghost);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.nf-title {
+  margin: 16px 0 20px;
+  font-size: var(--fs-h1);
+  max-width: 14ch;
+  animation: title-rise 1s var(--ease) both;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}

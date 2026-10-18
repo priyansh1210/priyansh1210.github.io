@@ -1,0 +1,212 @@
+/* Sized from the viewport HEIGHT as well as its width, so the street at the
+   bottom of the hero is on screen without scrolling, even on short laptop
+   screens. Space above the hero content (also used by .ink-hint below). */
+.hero {
+  --hero-top: calc(var(--header-h) + clamp(20px, 6svh, 96px));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--hero-top);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.hero a,
+.hero button {
+  cursor: pointer;
+}
+
+/* A soft lime glow behind the headline */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 60vmax;
+  aspect-ratio: 1;
+  left: -18vmax;
+  top: -26vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow), transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 4.5svh, 48px);
+  padding-bottom: clamp(24px, 6svh, 72px);
+}
+
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 36px;
+  padding: 0 16px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--bg-raised) 70%, transparent);
+}
+
+.hero-meta {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  align-self: center;
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.75fr);
+  align-items: end;
+  gap: 28px clamp(32px, 5vw, 80px);
+}
+
+.hero-title {
+  font-size: clamp(38px, min(5.6vw, 9.2svh), 96px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+/* Word-by-word rise */
+.hw {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.hw > span {
+  display: inline-block;
+  animation: word-rise 1s var(--ease) both;
+  animation-delay: calc(150ms + var(--i) * 70ms);
+}
+
+@keyframes word-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+/* Rotating accent word: every word shares one grid cell; the cell's width
+   (--w, measured in Hero.tsx) eases to fit whichever word is showing. */
+.hw > .rot {
+  position: relative;
+  display: inline-grid;
+  width: var(--w, auto);
+  color: var(--accent-text);
+  transition: width 0.7s var(--ease);
+}
+
+.rot-word {
+  grid-area: 1 / 1;
+  justify-self: start;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(45%);
+  transition:
+    transform 0.8s var(--ease),
+    opacity 0.35s;
+}
+
+.rot-word.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.rot-word.is-off {
+  transform: translateY(-45%);
+}
+
+.rot-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.02em;
+  width: 100%;
+  height: 0.14em;
+  overflow: visible;
+}
+
+.rot-line path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: draw-line 0.9s 0.3s var(--ease) forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-side {
+  display: grid;
+  gap: clamp(18px, 3svh, 28px);
+}
+
+.hero-intro {
+  max-width: 42ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero .ink-hint {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--hero-top) + 48px);
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .hero-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero .ink-hint {
+    display: none;
+  }
+}
+
+/* Phones: tighter type and one call to action, so the street still fits on screen */
+@media (max-width: 560px) {
+  .hero-meta,
+  .hero-copy {
+    display: none;
+  }
+
+  .hero-status {
+    height: 32px;
+    font-size: var(--fs-xs);
+  }
+
+  .hero-title {
+    font-size: clamp(32px, min(9.4vw, 6svh), 44px);
+  }
+
+  .hero-intro {
+    font-size: 16px;
+  }
+}

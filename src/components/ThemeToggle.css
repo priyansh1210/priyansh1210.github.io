@@ -1,0 +1,29 @@
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--ink);
+}
+
+.theme-toggle .icon {
+  grid-area: 1 / 1;
+  transition:
+    transform 0.6s var(--ease),
+    opacity 0.4s;
+}
+
+/* Show the icon for the theme you'd switch TO */
+.theme-toggle[data-current='dark'] .theme-toggle-moon,
+.theme-toggle[data-current='light'] .theme-toggle-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.4);
+}

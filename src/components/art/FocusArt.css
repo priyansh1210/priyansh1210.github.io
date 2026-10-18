@@ -1,0 +1,249 @@
+.art {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(80% 70% at 50% 40%, var(--glow), transparent 70%),
+    var(--surface);
+  border: 1px solid var(--line-2);
+  overflow: hidden;
+}
+
+.art svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.art:not([data-in='true']) * {
+  animation-play-state: paused !important;
+}
+
+/* ---------- Artboard ---------- */
+
+.ab-frame {
+  fill: var(--bg-raised);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.ab-rule {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.ab-dot {
+  fill: var(--line);
+}
+
+.ab-b {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ab-in 6s var(--ease) infinite backwards;
+  animation-delay: calc(var(--i) * 180ms);
+}
+
+.ab-ink {
+  fill: var(--ink);
+}
+
+.ab-soft {
+  fill: var(--ink-4);
+}
+
+.ab-accent {
+  fill: var(--accent);
+}
+
+.ab-img {
+  fill: var(--warm);
+  opacity: 0.85;
+}
+
+.ab-card {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+@keyframes ab-in {
+  0% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.85);
+  }
+  14%,
+  80% {
+    opacity: 1;
+    transform: none;
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+.ab-cursor {
+  fill: var(--ink);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transform: translate(236px, 150px);
+  animation: ab-cursor 6s var(--ease-in-out) infinite;
+}
+
+@keyframes ab-cursor {
+  0%,
+  100% {
+    transform: translate(236px, 150px);
+  }
+  18% {
+    transform: translate(120px, 70px);
+  }
+  36% {
+    transform: translate(92px, 118px);
+  }
+  56% {
+    transform: translate(232px, 96px);
+  }
+  76% {
+    transform: translate(140px, 152px);
+  }
+}
+
+/* ---------- Orbit ---------- */
+
+.orb-ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 6;
+}
+
+.orb-ring--inner {
+  stroke-dasharray: none;
+  stroke: var(--line-2);
+}
+
+.orb-st {
+  fill: var(--bg-raised);
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orb-lit 4.8s linear infinite;
+  animation-delay: calc(var(--i) * 0.8s);
+}
+
+@keyframes orb-lit {
+  0%,
+  3% {
+    fill: var(--accent);
+    stroke: var(--accent);
+    transform: scale(1.25);
+  }
+  20%,
+  100% {
+    fill: var(--bg-raised);
+    stroke: var(--ink-3);
+    transform: scale(1);
+  }
+}
+
+.orb-pulse {
+  transform-origin: 160px 100px;
+  animation: orb-spin 4.8s linear infinite;
+}
+
+.orb-pulse-glow {
+  fill: var(--accent);
+  opacity: 0.25;
+}
+
+.orb-pulse-dot {
+  fill: var(--accent);
+}
+
+@keyframes orb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orb-core circle {
+  fill: var(--ink);
+}
+
+.orb-core path {
+  fill: var(--accent);
+}
+
+.orb-core {
+  transform-origin: 160px 100px;
+  animation: orb-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes orb-breathe {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ---------- Stack ----------
+   One 6s life per chip, offset by a fifth of that per chip (negative delays, so
+   the stack is already full on first paint): drop in at the top, sink one slot
+   every 1.2s, leave through the floor. */
+
+.st-base {
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.st-pill {
+  fill: var(--bg-raised);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.st-label {
+  fill: var(--ink-4);
+}
+
+.st-chip {
+  animation: st-life 6s var(--ease) infinite;
+  animation-delay: calc(var(--i) * -1.2s);
+}
+
+@keyframes st-life {
+  0% {
+    transform: translateY(-110px);
+    opacity: 0;
+  }
+  10%,
+  18% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  22%,
+  38% {
+    transform: translateY(26px);
+  }
+  42%,
+  58% {
+    transform: translateY(52px);
+  }
+  62%,
+  78% {
+    transform: translateY(78px);
+  }
+  82%,
+  94% {
+    transform: translateY(104px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(124px);
+    opacity: 0;
+  }
+}
